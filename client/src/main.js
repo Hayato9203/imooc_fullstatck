@@ -13,3 +13,9 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+// 另一种方式
+// new Vue({
+//   router,
+//   render: h => h(App)
+// }).$mount('#app')
