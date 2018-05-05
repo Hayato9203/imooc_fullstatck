@@ -1,0 +1,28 @@
+{
+  "name": "imooc_fullstatck",
+  "version": "1.0.0",
+  "description": "imooc shopping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hayato9203/imooc_fullstatck.git"
+  },
+  "keywords": [
+    "full",
+    "stack"
+  ],
+  "author": "hayato",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hayato9203/imooc_fullstatck/issues"
+  },
+  "homepage": "https://github.com/Hayato9203/imooc_fullstatck#readme",
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vue-cli": "^2.9.3",
+    "vue-router": "^3.0.1"
+  }
+}
