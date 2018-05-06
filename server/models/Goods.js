@@ -16,9 +16,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: true
     },
-    productImage: Sequelize.STRING,
-    createAt: Sequelize.DATE,
-    updateAt: Sequelize.DATE
+    productImage: Sequelize.STRING
   })
   return Good
 }

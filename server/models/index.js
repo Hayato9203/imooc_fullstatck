@@ -14,7 +14,7 @@ sequelize.authenticate().then(() => {
 })
 
 const model = sequelize.import(path.join(__dirname, 'Goods.js'))
-console.log(`model.name: ${model.name}`)
+// console.log(`model.name: ${model.name}`)
 db[model.name] = model
 
 db.sequelize = sequelize
