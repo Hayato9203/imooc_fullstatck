@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       trim: true
     },
-    salePrice: Sequelize.DECIMAL(10, 2),
+    productPrice: Sequelize.DECIMAL(10, 2),
     checked: Sequelize.BOOLEAN,
     productNum: {
       type: Sequelize.INTEGER,
