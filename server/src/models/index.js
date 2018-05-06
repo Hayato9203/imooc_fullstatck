@@ -7,9 +7,7 @@ const sequelize = new Sequelize('imooc_mall', 'root', 'Qshh92100#', {
   dialect: 'mysql'
 })
 
-sequelize.authenticate().then(() => {
-  console.log(`Connection has been established successfully.`)
-}).catch(err => {
+sequelize.authenticate().then().catch(err => {
   console.error(`Unable to connect to the database: ${err}`)
 })
 

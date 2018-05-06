@@ -1,10 +1,11 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import GoodsList from '@/views/GoodsList'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
+// client端的路由
+export default new VueRouter({
   routes: [
     {
       path: '/',

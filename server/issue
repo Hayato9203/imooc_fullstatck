@@ -1,0 +1,4 @@
+ Error: Can't set headers after they are sent.: res.writeHead()之后只能调用res.write(data),res.end(),不能用res.send()
+
+GoodsController找不到数据,catch到err: TypeError: Cannot read property 'findAll' of undefined,-----解决----https://stackoverflow.com/questions/42247971/nodejs-cannot-read-property-findall-of-undefined, 原因是Goods.findAll会根据model在define时的数据库名查找
+ 

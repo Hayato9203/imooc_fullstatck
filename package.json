@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Hayato9203/imooc_fullstatck#readme",
   "dependencies": {
+    "serve-favicon": "^2.5.0",
     "vue": "^2.5.16",
     "vue-cli": "^2.9.3",
     "vue-router": "^3.0.1"
