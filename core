@@ -1,0 +1,5 @@
+列表选中时改变样式: GoodsList.vue (v-for priceFilter)
+
+小屏幕时元素被折叠起来的话,使用类似toggle功能的样式: GoodsList.vue (:class="{'filterby-show':filterBy})
+
+vue-lazyload - 实现图片懒加载

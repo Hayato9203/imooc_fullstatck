@@ -10,18 +10,21 @@
             <span class="sortby">Sort by:</span>
             <a href="javascript:void(0)" class="default cur">Default</a>
             <a href="javascript:void(0)" class="price">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
-            <a href="javascript:void(0)" class="filterby stopPop">Filter by</a>
+            <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
           </div>
           <div class="accessory-result">
             <!-- filter -->
-            <div class="filter stopPop" id="filter">
+            <!-- 小屏幕被折叠起来的话,使用类似toggle功能的样式 -->
+            <div class="filter stopPop" id="filter" v-bind:class="{'filterby-show':filterBy}">
               <dl class="filter-price">
                 <dt>Price:</dt>
+                <!-- 默认选中all显示样式 -->
                 <dd><a href="javascript:void(0)"
                   :class="{'cur':priceChecked=='all'}" @click="priceChecked='all'">All
                 </a></dd>
+                <!-- 选中价格样式 -->
                 <dd v-for="(price,index) in priceFilter" :key="price.id">
-                  <a href="javascript:void(0)" :class="{'cur':priceChecked==index}" @click="priceChecked=index">
+                  <a href="javascript:void(0)" :class="{'cur':priceChecked==index}" @click="setPriceFilter(index)">
                     {{price.startPrice}} - {{price.endPrice}}
                   </a>
                 </dd>
@@ -50,6 +53,7 @@
           </div>
         </div>
       </div>
+      <div class="md-overlay" v-show="overLayFlag" @click="closePop"></div>
       <nav-footer></nav-footer>
     </div>
 </template>
@@ -71,7 +75,10 @@ export default{
         { startPrice: 500.00, endPrice: 1000.00 },
         { startPrice: 1000.00, endPrice: 2000.00 }
       ],
-      priceChecked: 'all'
+      // 控制价格选中样式
+      priceChecked: 'all',
+      filterBy: false,
+      overLayFlag: false
     }
   },
   components: {
@@ -83,6 +90,21 @@ export default{
   methods: {
     async getGoodsList () {
       this.goods = (await GoodsService.index()).data
+    },
+    // 小屏幕显示被折叠的价格
+    showFilterPop () {
+      this.filterBy = true
+      this.overLayFlag = true
+    },
+    // 小屏幕时将价格隐藏
+    closePop () {
+      this.filterBy = false
+      this.overLayFlag = false
+    },
+    // 修改选中价格的样式,并折叠侧边的价格
+    setPriceFilter (index) {
+      this.priceChecked = index
+      this.closePop()
     }
   }
 }
