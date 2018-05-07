@@ -2,3 +2,6 @@
 
 GoodsController找不到数据,catch到err: TypeError: Cannot read property 'findAll' of undefined,-----解决----https://stackoverflow.com/questions/42247971/nodejs-cannot-read-property-findall-of-undefined, 原因是Goods.findAll会根据model在define时的数据库名查找
  
+在公司的电脑上npm run seed时中文插入报错: Unhandled rejection SequelizeDatabaseError: Incorrect string value: '\xE5\xB0\x8F\xE7\xB1\xB3...' for column 'productName' at row 1  -----  查询mysql表的字符集SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation%';   显示为gbk和latin1之类, ---- 解决方法: 定义Goods的model的字符集并修改mysql的字符集
+
+v-for渲染时: Avoid using non-primitive value as key, use string/number value instead --- 解决方法是加个:key="xxx.id"

@@ -5,6 +5,12 @@ const path = require('path')
 const sequelize = new Sequelize('imooc_mall', 'root', 'Qshh92100#', {
   host: 'localhost',
   dialect: 'mysql'
+  // define: {
+  //   charset: 'utf8mb4',
+  //   dialectOptions: {
+  //     collate: 'utf8mb4_general_ci'
+  //   }
+  // }
 })
 
 sequelize.authenticate().then().catch(err => {

@@ -17,6 +17,11 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true
     },
     productImage: Sequelize.STRING
+  }, {
+    charset: 'utf8mb4',
+    dialectOptions: {
+      collate: 'utf8mb4_general_ci'
+    }
   })
   return Goods
 }
