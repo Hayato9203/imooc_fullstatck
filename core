@@ -2,4 +2,4 @@
 
 小屏幕时元素被折叠起来的话,使用类似toggle功能的样式: GoodsList.vue (:class="{'filterby-show':filterBy})
 
-vue-lazyload - 实现图片懒加载
+vue-lazyload - 实现图片懒加载,如果图片资源多,可以进行分页加载,好的用户体验
