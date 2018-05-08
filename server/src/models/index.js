@@ -17,9 +17,15 @@ sequelize.authenticate().then().catch(err => {
   console.error(`Unable to connect to the database: ${err}`)
 })
 
-const model = sequelize.import(path.join(__dirname, 'Goods.js'))
+const Goods = sequelize.import(path.join(__dirname, 'Goods.js'))
+const CartList = sequelize.import(path.join(__dirname, 'CartList.js'))
+const User = sequelize.import(path.join(__dirname, 'User.js'))
+const AddressList = sequelize.import(path.join(__dirname, 'AddressList.js'))
 // console.log(`model.name: ${model.name}`)
-db[model.name] = model
+db[Goods.name] = Goods
+db[User.name] = User
+db[CartList.name] = CartList
+db[AddressList.name] = AddressList
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
