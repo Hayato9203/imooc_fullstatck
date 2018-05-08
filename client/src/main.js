@@ -9,8 +9,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueLazyload, {
   error: '/static/loading-svg/loading-broken.svg',
-  loading: '/static/loading-svg/loading-bars.svg',
-  preLoad: 1.3
+  loading: '/static/loading-svg/loading-bars.svg'
 })
 
 /* eslint-disable no-new */
