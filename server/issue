@@ -7,3 +7,5 @@ GoodsController找不到数据,catch到err: TypeError: Cannot read property 'fin
 v-for渲染时: Avoid using non-primitive value as key, use string/number value instead --- 解决方法是加个:key="xxx.id"
 
 尝试自动导入全部虚拟json数据,读取json到Object后,创建每一张表要分别指定表名,步骤较复杂,放弃
+
+尝试改变商品图片,发现不能显示,怀疑是图片名字有下划线的原因,存到数据库和读取时不能转换 --- 并不是, ---  是扩展名要大小写要对的上

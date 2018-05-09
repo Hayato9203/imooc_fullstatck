@@ -14,6 +14,7 @@ Vue.use(VueLazyload, {
 
 /* eslint-disable no-new */
 new Vue({
+  model: 'history',
   el: '#app',
   router,
   components: { App },

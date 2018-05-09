@@ -2,60 +2,60 @@
     "productId": "10001",
     "productName": "iPhone X",
     "productPrice": "8316.00",
-    "productImage": "iPhone_X.jpg"
+    "productImage": "iPhoneX.jpg"
   },
   {
     "productId": "10002",
     "productName": "MacBook Pro",
     "productPrice": "11588.00",
-    "productImage": "MacBook_Pro.jpg"
+    "productImage": "MacBookPro.jpg"
   },
   {
     "productId": "10003",
     "productName": "Apple HomePod",
     "productPrice": "2525.00",
-    "productImage": "Apple_Homepod.jpg"
+    "productImage": "AppleHomepod.jpg"
   },
   {
     "productId": "10004",
     "productName": "iMac Pro",
     "productPrice": "38999.00",
-    "productImage": "iMac_Pro.jpg"
+    "productImage": "iMacPro.jpg"
   },
   {
     "productId": "10005",
     "productName": "iPad Pro",
     "productPrice": "5888.00",
-    "productImage": "iPad_Pro.jpg"
+    "productImage": "iPadPro.jpg"
   },
   {
     "productId": "10006",
     "productName": "MacBook Air",
     "productPrice": "7388.00",
-    "productImage": "MacBook_Air.jpg"
+    "productImage": "MacBookAir.jpg"
   },
   {
     "productId": "10007",
     "productName": "iPhone 8",
     "productPrice": "4899.00",
-    "productImage": "iPhone_8.jpg"
+    "productImage": "iPhone8.jpg"
   },
   {
     "productId": "10008",
     "productName": "Apple Watch Series 3",
     "productPrice": "2863.00",
-    "productImage": "Apple_Watch_Series_3.jpg"
+    "productImage": "AppleWatchSeries3.jpg"
   },
   {
     "productId": "10009",
     "productName": "iPod touch",
     "productPrice": "1899.00",
-    "productImage": "iPod_touch.jpg"
+    "productImage": "iPodTouch.jpg"
   },
   {
     "productId": "10010",
     "productName": "Beats Solo3",
     "productPrice": "1988.00",
-    "productImage": "Beats_Solo3.jpg"
+    "productImage": "BeatsSolo3.jpg"
   }
 ]
