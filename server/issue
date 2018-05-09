@@ -9,3 +9,5 @@ v-for渲染时: Avoid using non-primitive value as key, use string/number value 
 尝试自动导入全部虚拟json数据,读取json到Object后,创建每一张表要分别指定表名,步骤较复杂,放弃
 
 尝试改变商品图片,发现不能显示,怀疑是图片名字有下划线的原因,存到数据库和读取时不能转换 --- 并不是, ---  是扩展名要大小写要对的上
+
+GoodsList.vue中sortPrice方法: 由于model的数据类型是decimal,不进行parseFloat转换的话,价格比较不成功. 使用client端进行商品价格排序,响应快速,不需请求server端获取数据可以减少服务器压力,提升用户体验

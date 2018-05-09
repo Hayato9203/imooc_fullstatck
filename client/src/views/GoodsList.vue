@@ -7,9 +7,11 @@
       <div class="accessory-result-page accessory-page">
         <div class="container">
           <div class="filter-nav">
+            <!-- 商品排序 -->
             <span class="sortby">Sort by:</span>
             <a href="javascript:void(0)" class="default cur">Default</a>
-            <a href="javascript:void(0)" class="price">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
+            <!-- 价格排序 -->
+            <a href="javascript:void(0)" class="price" @click="sortPrice">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
             <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
           </div>
           <div class="accessory-result">
@@ -78,13 +80,16 @@ export default{
       // 控制价格选中样式
       priceChecked: 'all',
       filterBy: false,
-      overLayFlag: false
+      overLayFlag: false,
+      // 商品排序
+      sortFlag: true
     }
   },
   components: {
     NavHeader, NavFooter, NavBread
   },
   mounted () {
+    // 页面加载时即刻访问后台取得数据
     this.getGoodsList()
   },
   methods: {
@@ -105,7 +110,24 @@ export default{
     setPriceFilter (index) {
       this.priceChecked = index
       this.closePop()
+    },
+    sortPrice () {
+      this.sortFlag = !this.sortFlag
+      if (this.sortFlag) {
+        this.goods.sort(function (a, b) {
+          if (parseFloat(a.productPrice) < parseFloat(b.productPrice)) return -1
+          if (parseFloat(a.productPrice) > parseFloat(b.productPrice)) return 1
+          return 0
+        })
+      } else {
+        this.goods.sort(function (a, b) {
+          if (parseFloat(a.productPrice) < parseFloat(b.productPrice)) return 1
+          if (parseFloat(a.productPrice) > parseFloat(b.productPrice)) return -1
+          return 1
+        })
+      }
     }
-  }
+  },
+  computed: { }
 }
 </script>
