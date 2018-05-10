@@ -50,7 +50,7 @@
                     </div>
                   </li>
                 </ul>
-                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
+                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20" class="load-more">
                   加载中...
                 </div>
               </div>
@@ -102,22 +102,23 @@ export default{
   },
   methods: {
     // p: 接收页码, scroll: 数据滚动加载状态
-    async getGoodsList (p = 1, scroll = false) {
+    async getGoodsList (scroll) {
       // 先取得要请求的页码的数据,这样做有bug,就算页码p没数据还是会发送请求
-      let requestObj = (await GoodsService.index(p, this.pageSize)).data
+      let requestObj = (await GoodsService.index(this.page, this.pageSize)).data
       // 判段数据是否在滚动加载状态,是的话就添加到现有数据
       if (scroll) {
-        // 拼接商品对象数组
-        this.goods = [...this.goods, ...requestObj]
+        if (requestObj.length !== 0) {
+          // 拼接商品对象数组
+          this.goods = [...this.goods, ...requestObj]
+          // 否则,启用滚动加载状态,监听下次加载数据
+          this.busy = false
+        } else {
+          // 如果页码p处后没有数据了,把滚动加载状态关闭,不再监听滚动
+          this.busy = true
+        }
       } else {
         // 不在滚动加载状态的话,直接返回数据
         this.goods = requestObj
-      }
-      // 如果页码p处没有数据,把滚动加载状态关闭
-      if (requestObj === 0) {
-        this.busy = true
-      } else {
-        // 否则,启用滚动加载状态,监听下次加载数据
         this.busy = false
       }
       // console.log(`Goods Length: ${this.goods.length}`)
@@ -163,9 +164,17 @@ export default{
       // 请求的商品列表可能非常大,会对服务器造成压力,所以使用setTimeout控制请求,防止无止境加载
       setTimeout(() => {
         this.page++
-        this.getGoodsList(this.page, this.busy)
+        this.getGoodsList(true)
       }, 1000)
     }
   }
 }
 </script>
+
+<style scoped>
+.load-more {
+  height: 100;
+  width: 100;
+  text-align: center;
+}
+</style>
