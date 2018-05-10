@@ -22,11 +22,11 @@ module.exports = {
           // 跳过条目
           offset: skip,
           // 显示后续条目
-          limit: pageSize,
-          // ASC是升序
+          limit: pageSize
+          // ASC是升序,这里暂时不需要排序,有client端自动完成
           // order: [['productPrice', 'ASC']],
           // DESC是降序
-          order: [['productPrice', 'DESC']]
+          // order: [['productPrice', 'DESC']]
         })
         // console.log(`goods: ${goods}`)
       } else {

@@ -74,7 +74,7 @@ import GoodsService from '@/services/GoodsService'
 export default{
   data () {
     return {
-      goods: null,
+      goods: [],
       priceFilter: [
         { startPrice: 0.00, endPrice: 500.00 },
         { startPrice: 500.00, endPrice: 1000.00 },
@@ -86,26 +86,41 @@ export default{
       overLayFlag: false,
       // 商品排序
       sortFlag: true,
-      // 控制滚动加载
+      // 控制滚动加载状态,true为禁止滚动
       busy: true,
       // 默认页码和页面数目
       page: 1,
-      pageSize: 4
+      pageSize: 8
     }
   },
   components: {
     NavHeader, NavFooter, NavBread
   },
   mounted () {
-    // 页面加载时即刻访问后台取得数据
+    // 页面首次加载时即刻访问后台取得数据
     this.getGoodsList()
   },
   methods: {
+    // p: 接收页码, scroll: 数据滚动加载状态
     async getGoodsList (p = 1, scroll = false) {
-      this.goods = (await GoodsService.index(p, this.pageSize)).data
+      // 先取得要请求的页码的数据
+      let requestObj = (await GoodsService.index(p, this.pageSize)).data
+      // 判段数据是否在滚动加载状态,是的话就添加到现有数据
       if (scroll) {
-        this.goods = [...this.goods, ...this.getGoodsList(p)]
+        // 拼接商品对象数组
+        this.goods = [...this.goods, ...requestObj]
+      } else {
+        // 不在滚动加载状态的话,直接返回数据
+        this.goods = requestObj
       }
+      // 如果页码p处没有数据,把滚动加载状态关闭
+      if (requestObj === 0) {
+        this.busy = true
+      } else {
+        // 否则,启用滚动加载状态,监听下次加载数据
+        this.busy = false
+      }
+      // console.log(`Goods Length: ${this.goods.length}`)
     },
     // 小屏幕显示被折叠的价格
     showFilterPop () {
@@ -148,7 +163,7 @@ export default{
       // 请求的商品列表可能非常大,会对服务器造成压力,所以使用setTimeout控制请求,防止无止境加载
       setTimeout(() => {
         this.page++
-        this.getGoodsList(this.page, true)
+        this.getGoodsList(this.page, this.busy)
       }, 1000)
     }
   }
