@@ -103,7 +103,7 @@ export default{
   methods: {
     // p: 接收页码, scroll: 数据滚动加载状态
     async getGoodsList (p = 1, scroll = false) {
-      // 先取得要请求的页码的数据
+      // 先取得要请求的页码的数据,这样做有bug,就算页码p没数据还是会发送请求
       let requestObj = (await GoodsService.index(p, this.pageSize)).data
       // 判段数据是否在滚动加载状态,是的话就添加到现有数据
       if (scroll) {
