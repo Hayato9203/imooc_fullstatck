@@ -5,3 +5,7 @@
 vue-lazyload - 实现图片懒加载,如果图片资源多,可以进行分页加载,好的用户体验
 
 GoodsController使用sequelize进行数据的分页和排序和选择显示的项目
+
+GoodsList.vue客户端商品排序功能,对象数组排序
+
+vue-infinite-scroll - 实现页面滚动加载功能https://www.npmjs.com/package/vue-infinite-scroll

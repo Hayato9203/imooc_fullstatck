@@ -50,6 +50,9 @@
                     </div>
                   </li>
                 </ul>
+                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
+                  加载中...
+                </div>
               </div>
             </div>
           </div>
@@ -82,7 +85,12 @@ export default{
       filterBy: false,
       overLayFlag: false,
       // 商品排序
-      sortFlag: true
+      sortFlag: true,
+      // 控制滚动加载
+      busy: true,
+      // 默认页码和页面数目
+      page: 1,
+      pageSize: 4
     }
   },
   components: {
@@ -93,8 +101,11 @@ export default{
     this.getGoodsList()
   },
   methods: {
-    async getGoodsList () {
-      this.goods = (await GoodsService.index()).data
+    async getGoodsList (p = 1, scroll = false) {
+      this.goods = (await GoodsService.index(p, this.pageSize)).data
+      if (scroll) {
+        this.goods = [...this.goods, ...this.getGoodsList(p)]
+      }
     },
     // 小屏幕显示被折叠的价格
     showFilterPop () {
@@ -111,23 +122,35 @@ export default{
       this.priceChecked = index
       this.closePop()
     },
+    // 商品排序,对象数组排序
     sortPrice () {
       this.sortFlag = !this.sortFlag
       if (this.sortFlag) {
         this.goods.sort(function (a, b) {
+          // 降序
           if (parseFloat(a.productPrice) < parseFloat(b.productPrice)) return -1
           if (parseFloat(a.productPrice) > parseFloat(b.productPrice)) return 1
           return 0
         })
       } else {
         this.goods.sort(function (a, b) {
+          // 升序
           if (parseFloat(a.productPrice) < parseFloat(b.productPrice)) return 1
           if (parseFloat(a.productPrice) > parseFloat(b.productPrice)) return -1
           return 1
         })
       }
+    },
+    // 滚动加载函数
+    loadMore () {
+      // 每次scoll发送请求前禁止滚动
+      this.busy = true
+      // 请求的商品列表可能非常大,会对服务器造成压力,所以使用setTimeout控制请求,防止无止境加载
+      setTimeout(() => {
+        this.page++
+        this.getGoodsList(this.page, true)
+      }, 1000)
     }
-  },
-  computed: { }
+  }
 }
 </script>

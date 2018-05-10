@@ -4,9 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueLazyload from 'vue-lazyload'
-
+var infiniteScroll = require('vue-infinite-scroll')
 Vue.config.productionTip = false
 
+Vue.use(infiniteScroll)
 Vue.use(VueLazyload, {
   error: '/static/loading-svg/loading-broken.svg',
   loading: '/static/loading-svg/loading-bars.svg'
@@ -14,7 +15,6 @@ Vue.use(VueLazyload, {
 
 /* eslint-disable no-new */
 new Vue({
-  model: 'history',
   el: '#app',
   router,
   components: { App },
