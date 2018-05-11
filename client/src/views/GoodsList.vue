@@ -112,6 +112,7 @@ export default{
       let requestObj = (await GoodsService.index(this.page, this.pageSize, start, end)).data
       // 判段数据是否在滚动加载状态,是的话就添加到现有数据
       if (scroll) {
+        console.log(`fff`)
         if (requestObj.length !== 0) {
           // 拼接商品对象数组
           this.goods = [...this.goods, ...requestObj]
@@ -123,9 +124,12 @@ export default{
           this.loading = false
         }
       } else {
+        console.log(`ggg`)
         // 不在滚动加载状态的话,直接返回数据
         this.goods = requestObj
         this.busy = false
+        if (requestObj.length === 0)
+          this.loading = false
       }
       // console.log(`Goods Length: ${this.goods.length}`)
     },

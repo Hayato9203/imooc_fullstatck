@@ -2,7 +2,7 @@ const {
   Goods
 } = require('../models')
 const { Op } = require('Sequelize')
-const {inspect} = require('util')
+// const {inspect} = require('util')
 
 module.exports = {
   async index (req, res) {
@@ -16,7 +16,7 @@ module.exports = {
         // 价格区间
         let start = parseFloat(req.query.start).toFixed(2)
         let end = parseFloat(req.query.end).toFixed(2)
-        console.log(!isNaN(start), !isNaN(end))
+        // console.log(!isNaN(start), !isNaN(end))
         if (!isNaN(start) && !isNaN(end)) {
           var options = {
             productPrice: {
@@ -24,7 +24,7 @@ module.exports = {
             }
           }
         }
-        console.log(`start: ${start}, end: ${end}, options: ${inspect(options)}`)
+        // console.log(`start: ${start}, end: ${end}, options: ${inspect(options)}`)
         // 将会跳过数据的条数
         let skip = (page - 1) * pageSize
 
