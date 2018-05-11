@@ -26,7 +26,7 @@ module.exports = {
         }
         console.log(`start: ${start}, end: ${end}, options: ${inspect(options)}`)
         // 将会跳过数据的条数
-        let skip = (page - 1) * pageSize
+        let skip = options ? null : (page - 1) * pageSize
 
         goods = await Goods.findAll({
           // 选择需要的column

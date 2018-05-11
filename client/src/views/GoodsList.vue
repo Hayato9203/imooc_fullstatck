@@ -78,7 +78,8 @@ export default{
       priceFilter: [
         { startPrice: 0.00, endPrice: 1500.00 },
         { startPrice: 1500.00, endPrice: 2500.00 },
-        { startPrice: 2500.00, endPrice: 5000.00 }
+        { startPrice: 2500.00, endPrice: 5000.00 },
+        { startPrice: 5000.00, endPrice: 100000.00 }
       ],
       // 控制价格选中样式
       priceChecked: 'all',
@@ -171,7 +172,10 @@ export default{
       // 请求的商品列表可能非常大,会对服务器造成压力,所以使用setTimeout控制请求,防止无止境加载
       setTimeout(() => {
         this.page++
-        this.getGoodsList(true)
+        let start = !isNaN(this.priceChecked) ? this.priceFilter[this.priceChecked].startPrice : null
+        let end = !isNaN(this.priceChecked) ? this.priceFilter[this.priceChecked].endPrice : null
+        // 解决价格筛选后,滚动加载的商品
+        this.getGoodsList(true, start, end)
       }, 1000)
     }
   }
