@@ -51,7 +51,8 @@
                   </li>
                 </ul>
                 <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20" class="load-more">
-                  加载中...
+                  <img src="../assets/loading-spinning-bubbles.svg" v-show="loading">
+                  <div v-show="!loading">已加载完全部商品<img src="../assets/smiling-emoticon-square-face.svg"></div>
                 </div>
               </div>
             </div>
@@ -91,7 +92,9 @@ export default{
       busy: true,
       // 默认页码和页面数目
       page: 1,
-      pageSize: 8
+      pageSize: 8,
+      // 控制资源加载时的图片
+      loading: false
     }
   },
   components: {
@@ -104,6 +107,7 @@ export default{
   methods: {
     // p: 接收页码, scroll: 数据滚动加载状态
     async getGoodsList (scroll, start, end) {
+      this.loading = true
       // 先取得要请求的页码p的数据
       let requestObj = (await GoodsService.index(this.page, this.pageSize, start, end)).data
       // 判段数据是否在滚动加载状态,是的话就添加到现有数据
@@ -116,6 +120,7 @@ export default{
         } else {
           // 如果页码p处后没有数据了,把滚动加载状态关闭,不再监听滚动
           this.busy = true
+          this.loading = false
         }
       } else {
         // 不在滚动加载状态的话,直接返回数据
@@ -178,7 +183,7 @@ export default{
         let end = !isNaN(this.priceChecked) ? this.priceFilter[this.priceChecked].endPrice : null
         // 解决价格筛选后,滚动加载的商品
         this.getGoodsList(true, start, end)
-      }, 1000)
+      }, 1500)
     }
   }
 }

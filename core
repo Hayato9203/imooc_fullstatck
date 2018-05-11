@@ -15,3 +15,5 @@ vue-infinite-scroll - 实现页面滚动加载功能,插件https://www.npmjs.com
 check if undefined - this.check === undefined
 
 @click时执行多个方法 - GoodsList的priceChecked=='all'处
+
+滚动加载loadMore部分,使用v-show加载svg图片实现友好的用户体验
