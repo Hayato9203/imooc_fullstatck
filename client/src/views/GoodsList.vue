@@ -76,15 +76,15 @@ export default{
     return {
       goods: [],
       priceFilter: [
-        { startPrice: 0.00, endPrice: 500.00 },
-        { startPrice: 500.00, endPrice: 1000.00 },
-        { startPrice: 1000.00, endPrice: 2000.00 }
+        { startPrice: 0.00, endPrice: 1500.00 },
+        { startPrice: 1500.00, endPrice: 2500.00 },
+        { startPrice: 2500.00, endPrice: 5000.00 }
       ],
       // 控制价格选中样式
       priceChecked: 'all',
       filterBy: false,
       overLayFlag: false,
-      // 商品排序
+      // 控制商品排序
       sortFlag: true,
       // 控制滚动加载状态,true为禁止滚动
       busy: true,
@@ -102,9 +102,9 @@ export default{
   },
   methods: {
     // p: 接收页码, scroll: 数据滚动加载状态
-    async getGoodsList (scroll) {
-      // 先取得要请求的页码的数据,这样做有bug,就算页码p没数据还是会发送请求
-      let requestObj = (await GoodsService.index(this.page, this.pageSize)).data
+    async getGoodsList (scroll, start, end) {
+      // 先取得要请求的页码p的数据
+      let requestObj = (await GoodsService.index(this.page, this.pageSize, start, end)).data
       // 判段数据是否在滚动加载状态,是的话就添加到现有数据
       if (scroll) {
         if (requestObj.length !== 0) {
@@ -133,13 +133,20 @@ export default{
       this.filterBy = false
       this.overLayFlag = false
     },
-    // 修改选中价格的样式,并折叠侧边的价格
+    // 实现价格筛选
     setPriceFilter (index) {
+      // 根据index修改价格选中时的样式,并折叠侧边的价格
       this.priceChecked = index
+      // 传输筛选价格到后台
+      let start = this.priceFilter[index].startPrice
+      let end = this.priceFilter[index].endPrice
+      // 传输filter的价格
+      this.goods = this.getGoodsList(false, start, end)
       this.closePop()
     },
     // 商品排序,对象数组排序
     sortPrice () {
+      // 控制商品价格升序或反序
       this.sortFlag = !this.sortFlag
       if (this.sortFlag) {
         this.goods.sort(function (a, b) {

@@ -8,4 +8,6 @@ GoodsController使用sequelize进行数据的分页和排序和选择显示的�
 
 GoodsList.vue客户端商品排序功能,对象数组排序
 
-vue-infinite-scroll - 实现页面滚动加载功能https://www.npmjs.com/package/vue-infinite-scroll
+vue-infinite-scroll - 实现页面滚动加载功能,插件https://www.npmjs.com/package/vue-infinite-scroll
+
+实现filterPrice功能 - 不仅能filter已加载的商品(不太实用,因为筛选另一价格时已加载的肯定商品中不符合,不如直接从服务器获得),还能从后台获得filter的数据

@@ -1,18 +1,30 @@
 const {
   Goods
 } = require('../models')
-// const {inspect} = require('util')
+const { Op } = require('Sequelize')
+const {inspect} = require('util')
 
 module.exports = {
   async index (req, res) {
     try {
       let goods = null
       let page = Number(req.query.page)
-      // console.log(typeof req.query.pagesize)
+      // console.log(typeof req.query.start)
       if (page) {
-        // 每页4条记录
-        let pageSize = Number(req.query.pagesize)
-
+        // 每页记录条数
+        let pageSize = Number(req.query.pagesize) || 8
+        // 价格区间
+        let start = parseFloat(req.query.start).toFixed(2)
+        let end = parseFloat(req.query.end).toFixed(2)
+        console.log(!!start, !!end)
+        if (!isNaN(start) && !isNaN(end)) {
+          var options = {
+            productPrice: {
+              [Op.between]: [start, end]
+            }
+          }
+        }
+        console.log(`start: ${start}, end: ${end}, options: ${inspect(options)}`)
         // 将会跳过数据的条数
         let skip = (page - 1) * pageSize
 
@@ -22,7 +34,8 @@ module.exports = {
           // 跳过条目
           offset: skip,
           // 显示后续条目
-          limit: pageSize
+          limit: pageSize,
+          where: options
           // ASC是升序,这里暂时不需要排序,有client端自动完成
           // order: [['productPrice', 'ASC']],
           // DESC是降序
