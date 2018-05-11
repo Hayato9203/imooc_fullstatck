@@ -16,7 +16,7 @@ module.exports = {
         // 价格区间
         let start = parseFloat(req.query.start).toFixed(2)
         let end = parseFloat(req.query.end).toFixed(2)
-        console.log(!!start, !!end)
+        console.log(!isNaN(start), !isNaN(end))
         if (!isNaN(start) && !isNaN(end)) {
           var options = {
             productPrice: {
@@ -26,7 +26,7 @@ module.exports = {
         }
         console.log(`start: ${start}, end: ${end}, options: ${inspect(options)}`)
         // 将会跳过数据的条数
-        let skip = options ? null : (page - 1) * pageSize
+        let skip = (page - 1) * pageSize
 
         goods = await Goods.findAll({
           // 选择需要的column

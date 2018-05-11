@@ -20,9 +20,9 @@
             <div class="filter stopPop" id="filter" v-bind:class="{'filterby-show':filterBy}">
               <dl class="filter-price">
                 <dt>Price:</dt>
-                <!-- 默认选中all显示样式 -->
+                <!-- 默认选中all显示样式,点击all时重载数据 -->
                 <dd><a href="javascript:void(0)"
-                  :class="{'cur':priceChecked=='all'}" @click="priceChecked='all'">All
+                  :class="{'cur':priceChecked=='all'}" @click="priceChecked='all';getGoodsList()">All
                 </a></dd>
                 <!-- 选中价格样式 -->
                 <dd v-for="(price,index) in priceFilter" :key="price.id">
@@ -136,12 +136,13 @@ export default{
     },
     // 实现价格筛选
     setPriceFilter (index) {
+      this.page = 1
       // 根据index修改价格选中时的样式,并折叠侧边的价格
       this.priceChecked = index
       // 传输筛选价格到后台
       let start = this.priceFilter[index].startPrice
       let end = this.priceFilter[index].endPrice
-      // 传输filter的价格
+      // 传输filter的价格,获取符合的商品
       this.goods = this.getGoodsList(false, start, end)
       this.closePop()
     },
@@ -172,6 +173,7 @@ export default{
       // 请求的商品列表可能非常大,会对服务器造成压力,所以使用setTimeout控制请求,防止无止境加载
       setTimeout(() => {
         this.page++
+        // console.log(this.page)
         let start = !isNaN(this.priceChecked) ? this.priceFilter[this.priceChecked].startPrice : null
         let end = !isNaN(this.priceChecked) ? this.priceFilter[this.priceChecked].endPrice : null
         // 解决价格筛选后,滚动加载的商品
