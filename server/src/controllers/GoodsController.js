@@ -1,7 +1,10 @@
 const {
-  Goods
+  Goods,
+  CartList
 } = require('../models')
-const { Op } = require('Sequelize')
+const {
+  Sequelize
+} = require('Sequelize')
 // const {inspect} = require('util')
 
 module.exports = {
@@ -20,7 +23,7 @@ module.exports = {
         if (!isNaN(start) && !isNaN(end)) {
           var options = {
             productPrice: {
-              [Op.between]: [start, end]
+              [Sequelize.Op.between]: [start, end]
             }
           }
         }
@@ -30,7 +33,7 @@ module.exports = {
 
         goods = await Goods.findAll({
           // 选择需要的column
-          attributes: ['productName', 'productPrice', 'productImage'],
+          attributes: ['productId', 'productName', 'productPrice', 'productImage'],
           // 跳过条目
           offset: skip,
           // 显示后续条目
@@ -50,6 +53,41 @@ module.exports = {
       console.log(`err: ${err}`)
       res.status(500).send({
         error: `An error has occured trying to fetch the goods: ${err}`
+      })
+    }
+  },
+  async post (req, res) {
+    console.log(`hahaha`)
+    const userId = 1
+    try {
+      const {productId} = req.body.params
+      console.log(`productId: ${productId}`)
+      const productItem = await CartList.findOne({
+        where: {
+          id: userId,
+          productId: productId
+        }
+      })
+      console.log(`productItem: ${productItem}`)
+      let newCart = {}
+      if (productItem) {
+        newCart = await CartList.update({
+          quantity: Sequelize.literal('quantity + 1')
+        }, {
+          where: {
+            id: userId
+          }
+        })
+      } else {
+        newCart = await CartList.create({
+          productId: productId,
+          quantity: 1
+        })
+      }
+      res.send(newCart)
+    } catch (err) {
+      res.status(500).send({
+        error: `An error has occured when add product to database: ${err}`
       })
     }
   }

@@ -1,22 +1,26 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const Goods = sequelize.define('Goods', {
-    productId: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
+    id: {
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false
+    },
+    productId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     productName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       trim: true
     },
-    productPrice: Sequelize.DECIMAL(10, 2),
-    checked: Sequelize.BOOLEAN,
+    productPrice: DataTypes.DECIMAL(10, 2),
+    checked: DataTypes.BOOLEAN,
     productNum: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: true
     },
-    productImage: Sequelize.STRING
+    productImage: DataTypes.STRING
   }, {
     charset: 'utf8mb4',
     dialectOptions: {

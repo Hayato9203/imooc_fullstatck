@@ -11,7 +11,7 @@ export default new VueRouter({
     // /路由显示GoodsList组件,该路由名为GoodsList
     {
       path: '/',
-      name: 'GoodsList',
+      name: 'goodslist',
       component: GoodsList
     }
   ]

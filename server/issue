@@ -15,3 +15,7 @@ GoodsList.vue中sortPrice方法: 由于model的数据类型是decimal,不进行p
 价格筛选部分成功:
 1、筛选一次后,后续的滚动加载时没实现价格筛选 -- 修改loadMore方法解决
 2、完成1步骤后,因为GoodsController每次请求都跳过skip数量,搞到进行其它价格筛选后已经没数据了 -- 修改GoodsController的options后返回同部分的数据
+
+添加购物车功能未实现 -- 因为关系绑定有点复杂,先实现登录模块
+
+登录模块User.findOne返回空 -- 使用await

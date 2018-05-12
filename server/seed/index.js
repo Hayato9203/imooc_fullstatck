@@ -1,11 +1,13 @@
 const {
   sequelize,
   Goods,
-  User
+  User,
+  CartList
 } = require('../src/models')
 const Promise = require('bluebird')
-const goods = require('./seed.json')
+const goods = require('./goods.json')
 const users = require('./users.json')
+const cartlists = require('./cartlists.json')
 
 sequelize.sync({
   force: true
@@ -17,6 +19,9 @@ sequelize.sync({
       }),
       users.map(user => {
         User.create(user)
+      }),
+      cartlists.map(cartlist => {
+        CartList.create(cartlist)
       })
     )
   })/* .then(process.exit(0)) */

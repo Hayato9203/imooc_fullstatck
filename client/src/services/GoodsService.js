@@ -13,5 +13,10 @@ export default {
         end: end
       }
     })
+  },
+  post (productId) {
+    return Api().post('addcart', {
+      productId: productId
+    })
   }
 }
