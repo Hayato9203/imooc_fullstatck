@@ -1,10 +1,5 @@
-const {
-  Goods,
-  CartList
-} = require('../models')
-const {
-  Sequelize
-} = require('Sequelize')
+const {Goods} = require('../models')
+const {Sequelize} = require('Sequelize')
 // const {inspect} = require('util')
 
 module.exports = {
@@ -53,41 +48,6 @@ module.exports = {
       console.log(`err: ${err}`)
       res.status(500).send({
         error: `An error has occured trying to fetch the goods: ${err}`
-      })
-    }
-  },
-  async post (req, res) {
-    console.log(`hahaha`)
-    const userId = 1
-    try {
-      const {productId} = req.body.params
-      console.log(`productId: ${productId}`)
-      const productItem = await CartList.findOne({
-        where: {
-          id: userId,
-          productId: productId
-        }
-      })
-      console.log(`productItem: ${productItem}`)
-      let newCart = {}
-      if (productItem) {
-        newCart = await CartList.update({
-          quantity: Sequelize.literal('quantity + 1')
-        }, {
-          where: {
-            id: userId
-          }
-        })
-      } else {
-        newCart = await CartList.create({
-          productId: productId,
-          quantity: 1
-        })
-      }
-      res.send(newCart)
-    } catch (err) {
-      res.status(500).send({
-        error: `An error has occured when add product to database: ${err}`
       })
     }
   }

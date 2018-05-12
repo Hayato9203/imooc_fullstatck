@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
   res.end()
 })
 
+require('./passport')
 require('./routes')(app)
 
 sequelize.sync().then(() => {

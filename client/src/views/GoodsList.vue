@@ -193,7 +193,6 @@ export default{
     async addCart (productId) {
       try {
         await GoodsService.post(productId).data
-        alert(`Add Cart Success`)
       } catch (err) {
         alert(`Add Cart Failed: ${err}`)
       }
