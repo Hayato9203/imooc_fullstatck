@@ -12,3 +12,4 @@
 :point_right: Goods model设置字符集<br />
 :point_right: 完成分页和limit功能<br />
 :point_right: 完成分页和limit、range功能<br />
+:point_right: 完成登录登出功能<br />
