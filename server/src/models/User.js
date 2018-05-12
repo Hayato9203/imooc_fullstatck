@@ -10,17 +10,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       trim: true,
-      validate: {
-        notEmpty: true,
-        notNull: true
-      }
+      notEmpty: true,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
-        notNull: true
-      }
+      notEmpty: true,
+      allowNull: false
     }
   }, {
     charset: 'utf8mb4',

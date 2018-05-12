@@ -1,3 +1,4 @@
+/* eslint-disable */
 const {
   sequelize,
   Goods,
@@ -7,7 +8,7 @@ const {
 const Promise = require('bluebird')
 const goods = require('./goods.json')
 const users = require('./users.json')
-const cartlists = require('./cartlists.json')
+// const cartlists = require('./cartlists.json')
 
 sequelize.sync({
   force: true
@@ -16,12 +17,11 @@ sequelize.sync({
     await Promise.all(
       goods.map(good => {
         Goods.create(good)
-      }),
+      })
+    ),
+    await Promise.all(
       users.map(user => {
         User.create(user)
-      }),
-      cartlists.map(cartlist => {
-        CartList.create(cartlist)
       })
     )
   })/* .then(process.exit(0)) */

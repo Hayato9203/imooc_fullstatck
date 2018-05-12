@@ -28,6 +28,6 @@ db[CartList.name] = CartList
 db[AddressList.name] = AddressList
 
 db.sequelize = sequelize
-db.Sequelize = Sequelize
+db.DataTypes = Sequelize
 
 module.exports = db

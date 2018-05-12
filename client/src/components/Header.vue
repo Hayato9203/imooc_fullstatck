@@ -51,7 +51,7 @@
             <div class="md-content">
               <div class="confirm-tips">
                 <div class="error-wrap">
-                  <span class="error error-show" v-show="errorTip">用户名或者密码错误</span>
+                  <span class="error error-show" v-if="!!error">{{error}}</span>
                 </div>
                 <ul>
                   <li class="regi_form_input">
@@ -155,7 +155,6 @@ export default {
       email: '',
       password: '',
       error: null,
-      errorTip: false,
       loginModalFlag: false
     }
   },
@@ -177,22 +176,24 @@ export default {
         // 调用store的setToken方法,将返回的jwt的token保存到store中
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.loginModalFlag = false
         this.$router.push({
           name: 'goodslist'
         })
-      } catch (error) {
-        this.error = error.response.data.error
+      } catch (err) {
+        this.error = err.response.data.error
       }
     },
     async logOut () {
       try {
-
+        this.$store.dispatch('setToken', null)
+        this.$store.dispatch('setUser', null)
+        this.$router.push({
+          name: 'goodslist'
+        })
       } catch (err) {
-
+        console.log(`logout failed: ${err}`)
       }
-    },
-    async a () {
-      await AuthenticationService.a({ a: 'f' })
     }
   }
 }
