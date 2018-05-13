@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
         error: `you do not have acces to this resource`
       })
     } else if (!user) {
-      res.status(400).send({
+      return res.status(400).send({
         error: `Please log in first`
       })
     } else {
