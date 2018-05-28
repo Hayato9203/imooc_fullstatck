@@ -28,8 +28,8 @@
             </div>
             <div class="navbar-right-container" style="display: flex;">
               <div class="navbar-menu-container">
-                <span class="navbar-link" v-text="user.email" v-if="user"></span>
-                <a href="javascript:void(0)" class="navbar-link" @click="loginModalFlag=true" v-if="!user">Login</a>
+                <span class="navbar-link" v-text="user.email" v-if="isUserLoggedIn"></span>
+                <a href="javascript:void(0)" class="navbar-link" @click="loginModalFlag=true" v-if="!isUserLoggedIn">Login</a>
                 <a href="javascript:void(0)" class="navbar-link" @click="logOut" v-else>Logout</a>
                 <div class="navbar-cart-container">
                   <span class="navbar-cart-count" v-text="cartCount" v-if="cartCount"></span>
@@ -188,9 +188,6 @@ export default {
       try {
         this.$store.dispatch('setToken', null)
         this.$store.dispatch('setUser', null)
-        this.$router.push({
-          name: 'goodslist'
-        })
       } catch (err) {
         console.log(`logout failed: ${err}`)
       }

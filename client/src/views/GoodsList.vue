@@ -71,6 +71,7 @@ import NavHeader from '@/components/Header'
 import NavFooter from '@/components/Footer'
 import NavBread from '@/components/Bread'
 import GoodsService from '@/services/GoodsService'
+// const {inspect} = require('util')
 
 export default{
   data () {
@@ -195,6 +196,11 @@ export default{
         this.cart = (await GoodsService.post(productId)).data
       } catch (err) {
         let error = err.response.data.error
+        if (err.response.status === 401) {
+          this.$store.dispatch('setToken', null)
+          this.$store.dispatch('setUser', null)
+        }
+        // console.log('err.response.data: ' + inspect(err.response))
         alert(`Add Cart Failed: ${error}`)
       }
     }

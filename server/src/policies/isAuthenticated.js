@@ -3,12 +3,8 @@ const passport = require('passport')
 // jwt从client端(../passport.js中传来的JwtStrategy)与server端的jwt比较
 module.exports = function (req, res, next) {
   passport.authenticate('jwt', function (err, user) {
-    if (err) {
-      res.status(400).send({
-        error: `you do not have acces to this resource`
-      })
-    } else if (!user) {
-      return res.status(400).send({
+    if (err || !user) {
+      res.status(401).json({
         error: `Please log in first`
       })
     } else {

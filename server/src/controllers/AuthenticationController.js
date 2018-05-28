@@ -4,7 +4,8 @@ const config = require('../config/config')
 // const {inspect} = require('util')
 
 function jwtSignUser (user) {
-  const ONE_DAY = 60 * 60 * 24
+  // const ONE_DAY = 60 * 60 * 24
+  const ONE_DAY = '1m'
   return jwt.sign(user, config.authentication.jwtSecret, {
     expiresIn: ONE_DAY
   })

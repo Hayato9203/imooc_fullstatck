@@ -6,6 +6,14 @@ const {
 } = require('../models')
 // const {Sequelize} = require('Sequelize')
 const {inspect} = require('util')
+pe = require('parse-error')
+
+const to = function (promise) {
+  return promise
+    .then(data => {
+      return [null, data]
+    }).catch(err => [pe(err)])
+}
 
 module.exports = {
   async post (req, res) {
@@ -20,6 +28,17 @@ module.exports = {
       //     productId: productId
       //   }
       // })
+
+      // let user = req.user
+      // let err, companies
+      // console.log(`user: ${inspect(user)}`)
+      // [err, companies] = await to(cartlists.getUser({
+      //   include: [{
+      //     association: Cartlist.Users
+      //   }]
+      // }))
+      [err, companies] = await to(user.getCartlists())
+      console.log(`companies: ${inspect(companies)}`)
       const productItem = await CartList.findAll({
         where: {
           UserId: userId
